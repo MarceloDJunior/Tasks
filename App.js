@@ -1,21 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from '@use-expo/font'
+import Navigator from './src/Navigator'
+import { StatusBar } from 'react-native';
+import SplashScreen from './src/screens/SplashScreen';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+    const [loaded] = useFonts({
+        Lato: require('./assets/fonts/Lato.ttf'),
+    });
+
+    StatusBar.setBarStyle('light-content', true)
+
+    if (!loaded) {
+        return null
+    } else {
+        return (
+            <Navigator />
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
